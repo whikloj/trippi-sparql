@@ -90,6 +90,8 @@ public class SparqlConnector extends TriplestoreConnector {
 
     public static final String DEFAULT_MAX_HTTP_CONNECTIONS = "10";
 
+    public static final String DEFAULT_MAX_TRIPLESTORE_GROWTH = "5";
+
     private Map<String, String> config;
 
     private SparqlSessionFactory factory;
@@ -186,7 +188,10 @@ public class SparqlConnector extends TriplestoreConnector {
             tripleIteratorFactory = new TripleIteratorFactory();
         }
 
-        final ConfigurableSessionPool pool = new ConfigurableSessionPool(factory, 1, 5, 1);
+        final int maxTripleStoreGrowth =
+            parseInt(config.getOrDefault("maxTripleStorePoolGrowth", DEFAULT_MAX_TRIPLESTORE_GROWTH));
+        log.info("Using max triplestore pool growth {}", maxTripleStoreGrowth);
+        final ConfigurableSessionPool pool = new ConfigurableSessionPool(factory, 1, maxTripleStoreGrowth, 1);
         final UpdateBuffer buffer = new MemUpdateBuffer(bufferFlushBatchSize, bufferSafeCapacity);
         try {
             writer = new ConcurrentTriplestoreWriter(pool, new DefaultAliasManager(), factory.newSession(), buffer,
