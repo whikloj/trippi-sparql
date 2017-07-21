@@ -25,6 +25,10 @@
           <artifactId>jena</artifactId>
           <groupId>com.hp.hpl.jena</groupId>
         </exclusion>
+        <exclusion>
+          <groupId>org.fcrepo</groupId>
+          <artifactId>openrdf-sesame-onejar</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
 
