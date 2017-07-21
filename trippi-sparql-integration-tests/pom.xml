@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -19,6 +20,13 @@
       <groupId>edu.si.trippi</groupId>
       <artifactId>trippi-sparql</artifactId>
       <version>${project.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.openrdf.sesame</groupId>
+      <artifactId>sesame-rio-api</artifactId>
+      <version>2.7.11</version>
       <scope>test</scope>
     </dependency>
 
@@ -67,8 +75,7 @@
       <testResource>
         <directory>${basedir}/src/test/resources/fedora-home</directory>
         <targetPath>${fedora.home}</targetPath>
-        <!-- we filter in order to insert the appropriate container port 
-          into the Trippi :: SPARQL configuration in fedora.fcfg -->
+        <!-- we filter in order to insert the appropriate container port into the Trippi :: SPARQL configuration in fedora.fcfg -->
         <filtering>true</filtering>
       </testResource>
 
@@ -89,8 +96,8 @@
         </configuration>
         <executions>
           <execution>
-            <!-- we choose this phase to ensure that the chosen port number 
-              is available for test resource filtering, specifically into fedora.fcfg -->
+            <!-- we choose this phase to ensure that the chosen port number is available for test resource filtering, specifically 
+              into fedora.fcfg -->
             <phase>process-test-sources</phase>
             <goals>
               <goal>reserve-network-port</goal>
