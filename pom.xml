@@ -6,7 +6,7 @@
 
 	<groupId>edu.si.trippi</groupId>
 	<artifactId>trippi</artifactId>
-	<version>1.2</version>
+	<version>1.3-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>Trippi :: SPARQL</name>
@@ -76,7 +76,7 @@
         <developerConnection>scm:git:git@github.com:Smithsonian/trippi-sparql.git</developerConnection>
         <connection>scm:git:git://github.com/Smithsonian/trippi-sparql.git</connection>
         <url>scm:git:git://github.com/Smithsonian/trippi-sparql.git</url>
-      <tag>trippi-1.2</tag>
+      <tag>HEAD</tag>
     </scm>
 
     <dependencyManagement>
