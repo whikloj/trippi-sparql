@@ -100,6 +100,7 @@ public class SparqlSession implements TriplestoreSession {
      * @param updateExecutor the service against which to execute SPARQL Update requests
      * @param queryExecutor the service against which to execute SPARQL Query non-CONSTRUCT requests
      * @param constructExecutor the service against which to execute SPARQL Query CONSTRUCT requests
+     * @param graphName the named graph into which to put and from which to retrieve triples
      */
     public SparqlSession(final Consumer<UpdateRequest> updateExecutor, final Function<Query, QueryExecution> queryExecutor,
                     final Function<Query, QueryExecution> constructExecutor, final Node graphName) {

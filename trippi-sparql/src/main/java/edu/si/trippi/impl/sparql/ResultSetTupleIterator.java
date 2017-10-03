@@ -61,7 +61,7 @@ public class ResultSetTupleIterator extends TupleIterator {
     /**
      * Default constructor.
      *
-     * @param r the {@code ResultSet} to wrap
+     * @param q the {@link QueryExecution} to wrap
      */
     public ResultSetTupleIterator(final QueryExecution q) {
         this.q = q;
