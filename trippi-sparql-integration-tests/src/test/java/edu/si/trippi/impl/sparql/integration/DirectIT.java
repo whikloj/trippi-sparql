@@ -128,6 +128,9 @@ public class DirectIT extends IT {
         assertTrue(solution.containsKey("s"));
         assertTrue(solution.get("s").equals(createResource("info:subject3")));
 
+        final String unicodeQuery = "SELECT ?s WHERE { GRAPH <#test> { ?s <info:déclaration> ?o } .}";
+        assertEquals(1, reader.findTuples("sparql", unicodeQuery, 0, true).count());
+
         // now delete them from our triplestore via our SPARQL Update connector
         writer.delete(triples, true);
 
@@ -188,7 +191,8 @@ public class DirectIT extends IT {
                     + "(<info:subject1> <info:predicate1> <info:subject2>)"
                     + "(<info:subject2> <info:predicate2> \"1234\"^^<http://www.w3.org/2001/XMLSchema#integer>)"
                     + "(<info:subject2> <info:predicate2> \"Chrysophylax\"^^<http://www.example.com/dives>)"
-                    + "(<info:subject3>  <info:predicate3> \"Shalom!\"@he))");
+            + "(<info:subject3>  <info:predicate3> \"Shalom!\"@he)" +
+            "(<info:subject9> <info:déclaration> \"Elzéar Lagimodière et Duncan McDougall concernant les événements de 1869-70\"))");
     private static final Model jenaModel = createModelForGraph(jenaGraph);
     private static final List<Triple> triples = jenaGraph.find(ANY).mapWith(tripleUnconverter::convert).toList();
 }
