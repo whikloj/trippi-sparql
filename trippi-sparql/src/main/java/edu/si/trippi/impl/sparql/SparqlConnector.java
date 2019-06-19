@@ -33,7 +33,6 @@ import static java.lang.Integer.parseInt;
 import static java.lang.String.format;
 import static org.apache.jena.graph.NodeFactory.createURI;
 import static org.apache.jena.riot.web.HttpOp.setDefaultHttpClient;
-import static org.apache.jena.riot.web.HttpOp.getDefaultHttpClient;
 import static org.apache.jena.sparql.util.FmtUtils.stringForNode;
 import static org.slf4j.LoggerFactory.getLogger;
 import static org.apache.http.params.CoreProtocolPNames.HTTP_CONTENT_CHARSET;
@@ -198,10 +197,13 @@ public class SparqlConnector extends TriplestoreConnector {
         final int maxConnections = parseInt(config.getOrDefault("maxHttpConnections", DEFAULT_MAX_HTTP_CONNECTIONS));
         connectionManager.setMaxTotal(maxConnections);
         connectionManager.setDefaultMaxPerRoute(maxConnections);
-        setDefaultHttpClient(new DefaultHttpClient(connectionManager));
+
         // Try setting charset to UTF-8
-        getDefaultHttpClient().getParams().setParameter(HTTP_ELEMENT_CHARSET, "UTF-8");
-        getDefaultHttpClient().getParams().setParameter(HTTP_CONTENT_CHARSET, "UTF-8");
+        final DefaultHttpClient client = new DefaultHttpClient(connectionManager);
+        client.getParams().setParameter(HTTP_ELEMENT_CHARSET, "UTF-8");
+        client.getParams().setParameter(HTTP_CONTENT_CHARSET, "UTF-8");
+
+        setDefaultHttpClient(client);
 
         if (tripleIteratorFactory == null) {
             tripleIteratorFactory = new TripleIteratorFactory();
